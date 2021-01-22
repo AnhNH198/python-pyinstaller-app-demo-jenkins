@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image: python2-alpine
+                    image 'python:2-alpine'
                 }
             }
             steps {
@@ -13,8 +13,8 @@ pipeline {
         }
         stage('Test') {
             agent {
-                docker{
-                    imgae 'qnib/pytest'
+                docker {
+                    image 'qnib/pytest'
                 }
             }
             steps {
@@ -33,11 +33,11 @@ pipeline {
                 }
             }
             steps {
-                sh 'pyinstaller --onefile source/add2vals.py'
+                sh 'pyinstaller --onefile sources/add.py'
             }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals'
+                    archiveArtifacts 'dist/add'
                 }
             }
         }

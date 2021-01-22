@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                docker {
+                docker.withServer('tcp://10.20.165.26:2375') {
                     image 'python:3-alpine'
                 }
             }
@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             agent {
-                docker {
+                docker.withServer('tcp://10.20.165.26:2375') {
                     image 'qnib/pytest'
                 }
             }
